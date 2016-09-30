@@ -29,23 +29,11 @@ angular.module('itunes').controller('mainCtrl', function($scope, itunesService){
 
     //Code here
   $scope.getSongData = function(artist) {
-    itunesService.getSongData(artist).then(function(response) {
-      var gridArray = [];
-      var resp = response.data.results
-      for (var i = 0; i < resp.length; i++) {
-        gridArray.push({
-          AlbumArt: resp[i].artworkUrl30,
-          Artist: resp[i].artistName,
-          SongName: resp[i].trackName,
-          Collection: resp[i].collectionName,
-          CollectionPrice: resp[i].collectionPrice,
-          Play: resp[i].previewUrl,
-          Type: resp[i].kind
-        });
-      };
-      $scope.songData = gridArray;
+    itunesService.getSongData().then(function(response) {
+      $scope.songData = response;
     })
   }
+  $scope.getSongData();
 
 
   //Check that the above method is working by entering a name into the input field on your web app, and then console.log the result
